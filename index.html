@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클릭 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #score {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #clickButton {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #clickButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>버튼 클릭 게임</h1>
+    <div id="score">점수: 0</div>
+    <button id="clickButton">클릭!</button>
+
+    <script>
+        // 초기 점수 설정
+        let score = 0;
+
+        // 버튼과 점수 표시 요소 가져오기
+        const scoreDisplay = document.getElementById('score');
+        const clickButton = document.getElementById('clickButton');
+
+        // 버튼 클릭 이벤트
+        clickButton.addEventListener('click', () => {
+            score++; // 점수 증가
+            scoreDisplay.textContent = `점수: ${score}`; // 점수 업데이트
+        });
+    </script>
+</body>
+</html>
