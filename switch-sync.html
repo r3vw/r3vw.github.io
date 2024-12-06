@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Sync Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .switch {
+            width: 100px;
+            height: 50px;
+            background-color: #ccc;
+            border-radius: 25px;
+            position: relative;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+        .switch .toggle {
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        .switch.on {
+            background-color: #4caf50;
+        }
+        .switch.on .toggle {
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Switch Sync Example</h1>
+    <div class="switch" id="switch">
+        <div class="toggle"></div>
+    </div>
+    <p id="status">Switch is OFF</p>
+
+    <script>
+        // 서버에서 상태를 시뮬레이션
+        let switchState = false; // 초기 상태 (OFF)
+
+        // HTML 요소 가져오기
+        const switchElement = document.getElementById('switch');
+        const statusElement = document.getElementById('status');
+
+        // 서버와 동기화 함수 (예제에서는 단순히 console.log로 대체)
+        function syncWithServer(state) {
+            console.log(`Server sync: Switch is now ${state ? 'ON' : 'OFF'}`);
+            // 실제로는 서버에 상태를 전송하거나 가져오는 코드 필요
+        }
+
+        // 스위치 상태 업데이트 함수
+        function updateSwitch(state) {
+            switchState = state;
+            if (switchState) {
+                switchElement.classList.add('on');
+                statusElement.textContent = 'Switch is ON';
+            } else {
+                switchElement.classList.remove('on');
+                statusElement.textContent = 'Switch is OFF';
+            }
+            syncWithServer(switchState);
+        }
+
+        // 사용자 클릭 이벤트
+        switchElement.addEventListener('click', () => {
+            const newState = !switchState; // 상태 반전
+            updateSwitch(newState); // 상태 업데이트
+        });
+
+        // 서버에서 상태를 받아와서 동기화하는 시뮬레이션
+        setInterval(() => {
+            // 서버에서 상태를 가져오는 시뮬레이션
+            const serverState = Math.random() > 0.5; // 랜덤 상태
+            updateSwitch(serverState); // 상태 동기화
+        }, 100); // 0.1초마다 서버 상태 갱신
+    </script>
+</body>
+</html>
